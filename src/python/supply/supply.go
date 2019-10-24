@@ -191,7 +191,7 @@ func (s *Supplier) CopyRuntimeTxt() error {
 }
 
 func (s *Supplier) HandleMercurial() error {
-	if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "grep", "-Fiq", "hg+", "requirements.txt"); err != nil {
+	if err := s.Command.Execute(s.Stager.BuildDir(), os.Stdout, os.Stdout, "grep", "-Fiq", "hg+", "requirements.txt"); err != nil {
 		return nil
 	}
 
@@ -334,7 +334,7 @@ func (s *Supplier) InstallPipPop() error {
 		return err
 	}
 
-	if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "pip-pop", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
+	if err := s.Command.Execute(s.Stager.BuildDir(), os.Stdout, os.Stdout, "python", "-m", "pip", "install", "--no-index", "git+https://github.com/Zanadar/pip-pop.git@master"); err != nil {
 		s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
 		return err
 	}
@@ -451,7 +451,7 @@ func pipfileToRequirements(lockFilePath string) (string, error) {
 func (s *Supplier) HandlePylibmc() error {
 	memcachedDir := filepath.Join(s.Stager.DepDir(), "libmemcache")
 
-	if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "pip-grep", "-s", "requirements.txt", "pylibmc"); err == nil {
+	if err := s.Command.Execute(s.Stager.BuildDir(), os.Stdout, os.Stdout, "pip-grep", "-s", "requirements.txt", "pylibmc"); err == nil {
 		s.Log.BeginStep("Noticed pylibmc. Bootstrapping libmemcached.")
 		if err := s.Installer.InstallOnlyVersion("libmemcache", memcachedDir); err != nil {
 			return err
@@ -506,7 +506,7 @@ func (s *Supplier) installFfi() error {
 }
 
 func (s *Supplier) HandleFfi() error {
-	if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "pip-grep", "-s", "requirements.txt", "pymysql", "argon2-cffi", "bcrypt", "cffi", "cryptography", "django[argon2]", "Django[argon2]", "django[bcrypt]", "Django[bcrypt]", "PyNaCl", "pyOpenSSL", "PyOpenSSL", "requests[security]", "misaka"); err == nil {
+	if err := s.Command.Execute(s.Stager.BuildDir(), os.Stdout, os.Stdout, "pip-grep", "-s", "requirements.txt", "pymysql", "argon2-cffi", "bcrypt", "cffi", "cryptography", "django[argon2]", "Django[argon2]", "django[bcrypt]", "Django[bcrypt]", "PyNaCl", "pyOpenSSL", "PyOpenSSL", "requests[security]", "misaka"); err == nil {
 		return s.installFfi()
 	}
 	return nil
@@ -707,7 +707,7 @@ export GUNICORN_CMD_ARGS=${GUNICORN_CMD_ARGS:-'--access-logfile -'}
 }
 
 func (s *Supplier) DownloadNLTKCorpora() error {
-	if err := s.Command.Execute("/", ioutil.Discard, ioutil.Discard, "python", "-m", "nltk.downloader", "-h"); err != nil {
+	if err := s.Command.Execute("/", os.Stdout, os.Stdout, "python", "-m", "nltk.downloader", "-h"); err != nil {
 		return nil
 	}
 

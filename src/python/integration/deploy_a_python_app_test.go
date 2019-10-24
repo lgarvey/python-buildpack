@@ -116,7 +116,7 @@ var _ = Describe("CF Python Buildpack", func() {
 				})
 			})
 
-			Context("including flask and no build isolation", func() {
+			FContext("including flask and no build isolation", func() {
 				BeforeEach(func() {
 					app = cutlass.New(Fixtures("no_build_isolation"))
 					app.SetEnv("BP_DEBUG", "1")

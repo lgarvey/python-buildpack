@@ -58,11 +58,11 @@ dependencies:
   source: https://github.com/conda/conda/archive/4.7.12.tar.gz
   source_sha256: a23fcffe97690d3bbcd34cda798c3a3318e0f35d863c5d4aca3fc983fe8450b7
 - name: pip-pop
-  version: 0.1.3
+  version: 0.2.0
   cf_stacks:
   - cflinuxfs3
-  uri: https://buildpacks.cloudfoundry.org/dependencies/manual-binaries/pip-pop/pip-pop-0.1.3-fc106ef6.tar.gz
-  sha256: fc106ef6e87c9da64ca3b5eda2a4b531bdd2d1965304e9385772c546c6a6fe59
+  uri: https://github.com/Zanadar/pip-pop/releases/download/v0.2.0/pip-pop-0.2.0.tar.gz
+  sha256: 0f35c9699efe7808f41c415530c278870d2e8ff38f8a4983eca6e59b389bb21a
   source: https://github.com/cloudfoundry/pip-pop/archive/v0.1.3.tar.gz
   source_sha256: b916caf6b9d9ea7bc1f53591b016a9e9e74f74b72925eb48600b90810ae0a285
 - name: pipenv
